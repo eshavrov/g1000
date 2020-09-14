@@ -16,9 +16,9 @@ body {
 	max-width: 133.3vh;
 }
 
-.aspect-4-3 {
-	height: 75vw;
-	max-width: 160.3vh;
+.aspect-pfd {
+	height: 62.96vw;
+	max-width: 158.82vh;
 }
 
 .aspect-16-9 {
