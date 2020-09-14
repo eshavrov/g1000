@@ -151,7 +151,7 @@ function renderPanel(context, width, height) {
   renderPanelTrail(context, 0.5, height - 23.5, x - 1, 23, "29.92IN");
 }
 
-function createPanelLayer(entity, width = 160, height = 400) {
+function createPanelLayer(entity, width = 160, height = 360) {
   const spriteBuffer = document.createElement("canvas");
   spriteBuffer.width = width;
   spriteBuffer.height = height;
@@ -160,7 +160,7 @@ function createPanelLayer(entity, width = 160, height = 400) {
 
   const center = {
     x: 600,
-    y: 100,
+    y: 80,
   };
 
   return function drawPanel(context) {

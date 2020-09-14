@@ -4,7 +4,7 @@ export function createBackgroundLayer(color, image) {
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
     const angle = Math.sin(Date.now() / 1000) / 10;
     const r = context.canvas.width;
-    const center = { x: context.canvas.width / 2, y: 200 };
+    const center = { x: context.canvas.width / 2, y: 260 };
 
     context.lineWidth = 2;
     context.fillStyle = "#004dfe";
