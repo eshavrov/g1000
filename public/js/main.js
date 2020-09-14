@@ -4,6 +4,7 @@ import SceneRunner from "./SceneRunner.js";
 import { createBackgroundLayer } from "./layers/bg.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
 import { createPanelLayer } from "./layers/panel.js";
+import { createWINDLayer} from "./layers/WIND.js"
 import { loadImage } from './loaders.js'
 
 async function main(canvas) {
@@ -17,13 +18,13 @@ async function main(canvas) {
   function createLoadingScreen() {
     const scene = new Scene();
 
-    // scene.comp.layers.push(createBackgroundLayer("#553300"));
-    scene.comp.layers.push(createDashboardLayer());
-    scene.comp.layers.push(createPanelLayer());
 
     loadImage("/img/panel.png").then(image=>{
-      scene.comp.layers.unshift(createBackgroundLayer("#553300",image));
-      
+      scene.comp.layers.push(createBackgroundLayer("#553300",image));
+      scene.comp.layers.push(createDashboardLayer());
+      scene.comp.layers.push(createPanelLayer());
+      scene.comp.layers.push(createWINDLayer());
+
 
     })
 

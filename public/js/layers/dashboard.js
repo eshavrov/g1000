@@ -61,6 +61,8 @@ function createDashboardLayer(entity) {
     context.closePath();
 
     context.font = "18px Arial";
+    context.textBaseline = "alphabetic";
+		context.textAlign = "start";
 
     for (let seg = 12; seg--; ) {
       context.save();
