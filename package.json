@@ -1,0 +1,15 @@
+{
+  "name": "g1000",
+  "version": "1.0.0",
+  "description": "g1000 simulator",
+  "main": "index.js",
+  "scripts": {
+    "start": "PORT=5000 serve ./public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^11.3.2"
+  }
+}
