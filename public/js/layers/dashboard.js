@@ -1,3 +1,5 @@
+import { airplane } from "../components/airplane.js";
+
 const DIRECTON = [
   "N",
   "3",
@@ -12,43 +14,21 @@ const DIRECTON = [
   "30",
   "33",
 ];
-const CIRCLE_LINES = [
-  { index: 0, width: 2, span: 0 },
-  { index: 9, width: 2, span: 0 },
-  { index: 27, width: 2, span: 0 },
-  { index: 36, width: 2, span: 0 },
-  { index: 45, width: 2, span: 0 },
-  { index: 50, width: 1, span: 0.5 },
-  { index: 52, width: 1, span: 0.5 },
-  { index: 56, width: 1, span: 0.5 },
-  { index: 58, width: 1, span: 0.5 },
 
-  { index: 63, width: 2, span: 0 },
+const CIRCLE_LINES = [
+  { index: 0, width: 2 },
+  { index: 9, width: 2 },
+  { index: 27, width: 2 },
+  { index: 36, width: 2 },
+  { index: 45, width: 2 },
+  { index: 50, width: 1 },
+  { index: 52, width: 1 },
+  { index: 56, width: 1 },
+  { index: 58, width: 1 },
+  { index: 63, width: 2 },
 ];
 
-const air = (context, { x, y }) => {
-  const s = 2;
-
-  context.moveTo(x - s, y);
-  context.lineTo(x - 6 * s, y);
-  context.lineTo(x - 6 * s, y - s);
-  context.lineTo(x - s, y - 3 * s);
-
-  context.arc(x, y - 6 * s, s, Math.PI, 2 * Math.PI);
-
-  context.lineTo(x + s, y - 3 * s);
-  context.lineTo(x + 6 * s, y - s);
-  context.lineTo(x + 6 * s, y);
-  context.lineTo(x + s, y);
-  context.lineTo(x + s, y + 3 * s);
-  context.lineTo(x + s * 2, y + 4 * s);
-  context.lineTo(x + s * 2, y + 5 * s);
-  context.lineTo(x - s * 2, y + 5 * s);
-  context.lineTo(x - s * 2, y + 4 * s);
-  context.lineTo(x - s, y + 3 * s);
-};
-
-export function createDashboardLayer(entity) {
+function createDashboardLayer(entity) {
   const center = {
     x: 400,
     y: 400,
@@ -104,8 +84,8 @@ export function createDashboardLayer(entity) {
     context.fillStyle = "white";
     context.strokeStyle = "white";
     context.lineWidth = 1;
-		const angleLine = Math.sin(Date.now() / 1600);
-		const angleInner = Math.cos(Date.now() / 1000)
+    const angleLine = Math.sin(Date.now() / 1600);
+    const angleInner = Math.cos(Date.now() / 1000);
 
     context.beginPath();
     context.rect(center.x, center.y, 2, 2);
@@ -157,17 +137,15 @@ export function createDashboardLayer(entity) {
     context.closePath();
 
     context.beginPath();
-    air(context, center);
+    airplane(context, center);
     context.fill();
 
     context.closePath();
 
     context.save();
-		context.translate(
-			center.x,
-			center.y
-		);
-		context.rotate(angleInner);
+    context.translate(center.x, center.y);
+    context.rotate(angleInner);
+
     circleInner(context, {
       angleLine,
       center: { x: 0, y: 0 },
@@ -175,3 +153,5 @@ export function createDashboardLayer(entity) {
     context.restore();
   };
 }
+
+export { createDashboardLayer };
