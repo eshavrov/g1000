@@ -30,8 +30,8 @@ const CIRCLE_LINES = [
 
 function createDashboardLayer(entity) {
   const center = {
-    x: 400,
-    y: 400,
+    x: 380,
+    y: 460,
   };
   const r = 120;
   const rDirection = r - 26;

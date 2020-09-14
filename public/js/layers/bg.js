@@ -1,4 +1,4 @@
-export function createBackgroundLayer(color) {
+export function createBackgroundLayer(color, image) {
   return function drawColor(context) {
     context.fillStyle = color;
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
@@ -7,7 +7,7 @@ export function createBackgroundLayer(color) {
     const center = { x: context.canvas.width / 2, y: 200 };
 
     context.lineWidth = 2;
-    context.fillStyle = "blue";
+    context.fillStyle = "#004dfe";
     context.strokeStyle = "white";
 
     context.beginPath();
@@ -27,5 +27,9 @@ export function createBackgroundLayer(color) {
     context.fill();
     context.stroke();
     context.closePath();
+
+    if (image) {
+      context.drawImage(image, 0, 0);
+    }
   };
 }
