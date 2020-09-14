@@ -20,6 +20,4 @@ const airplane = (context, { x, y }) => {
   context.lineTo(x - s, y + 3 * s);
 };
 
-export {
-	airplane
-}
+export { airplane };

@@ -3,7 +3,7 @@ import Scene from "./Scene.js";
 import SceneRunner from "./SceneRunner.js";
 import { createBackgroundLayer } from "./layers/bg.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
-import { createPanelLayer} from "./layers/panel.js" 
+import { createPanelLayer } from "./layers/panel.js";
 
 async function main(canvas) {
   const videoContext = canvas.getContext("2d");

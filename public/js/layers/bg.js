@@ -6,7 +6,10 @@ export function createBackgroundLayer(color) {
     const r = context.canvas.width;
     const center = { x: context.canvas.width / 2, y: 200 };
 
+    context.lineWidth = 2;
     context.fillStyle = "blue";
+    context.strokeStyle = "white";
+
     context.beginPath();
     context.moveTo(-2, -2);
 
@@ -22,6 +25,7 @@ export function createBackgroundLayer(color) {
     context.lineTo(context.canvas.width + 2, -2);
 
     context.fill();
+    context.stroke();
     context.closePath();
   };
 }
