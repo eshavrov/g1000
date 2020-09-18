@@ -1,0 +1,21 @@
+{
+	"imageURL": "/img/sprites.png",
+	"tileW": 16,
+	"tileH": 16,
+	"tiles": [
+		{
+			"name": "ISHW",
+			"index": [
+				0,
+				0
+			]
+		},
+		{
+			"name": "APT",
+			"index": [
+				1,
+				0
+			]
+		}
+	]
+}

@@ -4,29 +4,47 @@ import SceneRunner from "./SceneRunner.js";
 import { createBackgroundLayer } from "./layers/bg.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
 import { createPanelLayer } from "./layers/panel.js";
-import { createWINDLayer} from "./layers/WIND.js"
-import { loadImage } from './loaders.js'
+import { createWINDLayer } from "./layers/WIND.js";
+import { createMapLayer } from "./layers/map.js";
+import { createZoneLayer } from "./layers/zone.js";
+
+
+import { loadImage, loadJSON } from "./loaders.js";
 
 async function main(canvas) {
   const videoContext = canvas.getContext("2d");
+
+  var scale = window.devicePixelRatio || 1; // Change to 1 on retina screens to see blurry canvas.
+  canvas.width = Math.floor(canvas.width * scale);
+  canvas.height = Math.floor(canvas.height * scale);
+  videoContext.scale(scale, scale);
+  loadJSON("/tools/earth_fix.json");
+
+  // Normalize coordinate system to use css pixels.
   const audioContext = new AudioContext();
   const sceneRunner = new SceneRunner();
-  loadImage("/img/index.png").then(image=>{
-    console.log("loaded image", image);
-  })
 
   function createLoadingScreen() {
     const scene = new Scene();
+    Promise.all([
+      loadImage("/img/panel.png"),
+      loadJSON("/tools/APT/apt.json"),
+      loadJSON("/tools/CIR/circles.json"),
 
 
-    loadImage("/img/panel.png").then(image=>{
-      scene.comp.layers.push(createBackgroundLayer("#553300",image));
-      scene.comp.layers.push(createDashboardLayer());
-      scene.comp.layers.push(createPanelLayer());
-      scene.comp.layers.push(createWINDLayer());
+      // loadJSON("/tools/earth_fix.json"),
+      // loadJSON("/tools/earth_awy.json"),
+    ]).then(([image, airports, zones, points, edges]) => {
+      // scene.comp.layers.push(createBackgroundLayer("#553300", image));
+      // scene.comp.layers.push(createDashboardLayer());
+      // scene.comp.layers.push(createPanelLayer());
+      // scene.comp.layers.push(createWINDLayer());
 
+      // console.log(zones, Object.values(zones), airports);
+      scene.comp.layers.push(createMapLayer(airports));
+      // scene.comp.layers.push(createZoneLayer(Object.values(zones)));
 
-    })
+    });
 
     return scene;
   }
@@ -43,7 +61,7 @@ async function main(canvas) {
     tick: 0,
   };
 
-  const timer = new Timer(1 / 60);
+  const timer = new Timer(1/25 );
   timer.update = function update(deltaTime) {
     gameContext.tick++;
     gameContext.deltaTime = deltaTime;
