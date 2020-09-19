@@ -1,11 +1,11 @@
-let scale = 5;
-let camera = {};
+import { Vec2 } from "./math.js";
 
-function pos([x, y]) {
-  const _x = (x - camera.x) / scale + 600;
-  const _y = (-y + camera.y) / scale + 350;
+export default class Camera {
+  constructor() {
+    this.pos = new Vec2(0, 0);
+    this.size = new Vec2(256, 224);
 
-  return [_x, _y];
+    this.min = new Vec2(0, 0);
+    this.max = new Vec2(Infinity, Infinity);
+  }
 }
-
-export { scale, camera, pos };

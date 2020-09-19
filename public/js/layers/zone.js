@@ -3,8 +3,7 @@ import {
   FUNCTION_LINE,
   setLineStyles,
 } from "../components/lines/constants.js";
-import { scale, camera, pos } from "../camera.js";
-
+import { camera, pos } from "../_camera.js";
 
 function angleBetween([x, y], [x2, y2]) {
   return Math.atan2(y2 - y, x2 - x);
@@ -28,7 +27,6 @@ function nextPoint(context, type, x, y, ...other) {
   currentPosition.x = x;
   currentPosition.y = y;
 }
-
 
 function drawCircle(context, points, radius) {
   context.save();
@@ -61,17 +59,17 @@ function drawArc(context, points, radius, flag) {
 
     // 19688717.1, -4788508.9
     // console.log(x,y,target);
-    const cx = (x + x2) / 2;
-    const cy = (y + y2) / 2;
+    // const cx = (x + x2) / 2;
+    // const cy = (y + y2) / 2;
 
     const [_x, _y] = pos([x, y]);
     const [_x2, _y2] = pos([x2, y2]);
-    const [_cx, _cy] = pos([cx, cy]);
+    // const [_cx, _cy] = pos([cx, cy]);
 
-    const d = Math.sqrt((x - x2) ** 2 + (y - y2) ** 2);
+    // const d = Math.sqrt((x - x2) ** 2 + (y - y2) ** 2);
     // console.log(x, y, x2, y2, r, d);
-    // const _r = d / 2 / k;
-    const _r = r / scale;
+    // const _r = d / 2 / camera.scale;
+    const _r0 = r / camera.scale;
 
     // context.moveTo(_x, _y);
     // context.lineTo(_x2, _y2);
@@ -80,9 +78,10 @@ function drawArc(context, points, radius, flag) {
 
     // context.moveTo(_cx + _r * Math.cos(-angle), _cy + _r * Math.sin(-angle));
     // context.arc(_cx, _cy, _r, -angle, -angle + Math.PI, flag);
+    context.lineTo(_x, _y);
 
-    context.moveTo(_x2 + _r, _y2);
-    context.arc(_x2, _y2, _r, 0, 2 * Math.PI);
+    context.moveTo(_x2 + _r0, _y2);
+    context.arc(_x2, _y2, _r0, 0, 2 * Math.PI);
   });
   context.stroke();
   context.closePath();
@@ -137,12 +136,8 @@ let ii = 10;
 // }, 500);
 
 function createZoneLayer(zones) {
-  const [_, x, y] = zones[0].points[0];
-
-  // camera.x = x;
-  // camera.y = y;
-
   return function drawMap(context) {
+    // console.log("render zone");
     /*
     CIR (круг)
     CWA (по часовой стрелке)
@@ -205,7 +200,7 @@ function createZoneLayer(zones) {
       context.strokeStyle = "yellow";
       drawArc(context, arc2, 10, false);
     });
-    throw 1;
+    // throw 1;
 
     // drawPoints(
     //   context,
@@ -290,6 +285,16 @@ function createZoneLayer(zones) {
     //     [400, 500],
     //   ].reverse()
     //);
+    context.save();
+    context.strokeStyle = "white";
+    context.beginPath();
+    context.moveTo(camera.offsetX - 10, camera.offsetY);
+    context.lineTo(camera.offsetX + 10, camera.offsetY);
+    context.moveTo(camera.offsetX, camera.offsetY - 10);
+    context.lineTo(camera.offsetX, camera.offsetY + 10);
+    context.stroke();
+    context.closePath();
+    context.restore();
   };
 }
 

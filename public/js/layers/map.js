@@ -4,7 +4,7 @@ import {
   setLineStyles,
 } from "../components/lines/constants.js";
 import { lngLatToMeters } from "../utils/mercator.js";
-import { scale, camera, pos } from "../camera.js";
+import {  camera, pos } from "../camera.js";
 
 
 let target = {};
@@ -74,7 +74,7 @@ function createMapLayer(airports, points, point, edges, entry = {}) {
   camera.y = y;
 
   return function drawMap(context) {
-    airport.paths.forEach((a) => {
+    airport.figures.forEach((a) => {
       const points = a.loop ? [...a.points, a.points[0]] : a.points;
       drawPoints(context, TYPES.CLASS_D, points);
     });

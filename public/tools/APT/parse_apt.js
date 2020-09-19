@@ -51,7 +51,7 @@ async function processLineByLine() {
           points: [],
         };
 
-        currentAir = { id, city, icao_code, paths: [] };
+        currentAir = { id, city, icao_code, figures: [] };
         count++;
 
         break;
@@ -100,7 +100,7 @@ async function processLineByLine() {
           const [x, y] = lngLatToMeters([+lng, +lat]);
           way.points.push([x, y]);
           way.loop = true;
-          currentAir.paths.push(way);
+          currentAir.figures.push(way);
           way = { points: [] };
         }
         break;
@@ -121,7 +121,7 @@ async function processLineByLine() {
           const [x, y] = lngLatToMeters([+lng, +lat]);
           way.points.push([x, y]);
           way.loop = true;
-          currentAir.paths.push(way);
+          currentAir.figures.push(way);
           way = { points: [] };
         }
         break;
