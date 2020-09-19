@@ -1,4 +1,4 @@
-import Camera from "./Camera.js";
+import Camera from "./Camera2.js";
 import Scene from "./Scene.js";
 import { camera } from "./_camera.js";
 
