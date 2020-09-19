@@ -15,7 +15,7 @@ export function setupKeyboard(window) {
   const router = null;
 
   input.listenTo(window);
-  const step = 50;
+  const step = 16;
 
   input.addMapping(KEYMAP.UP, (keyState) => {
     camera.y += step * camera.scale;
